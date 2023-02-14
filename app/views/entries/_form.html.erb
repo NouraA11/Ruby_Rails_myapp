@@ -1,0 +1,56 @@
+<%= form_with(model: entry) do |form| %>
+  <% if entry.errors.any? %>
+    <div class="message is-danger">
+      <div class="message-header">
+        <p><%= pluralize(entry.errors.count, "error") %> prohibited this entry from being saved:</p>
+      </div>
+      <div class="message-body">
+        <ul>
+          <% entry.errors.each do |error| %>
+            <li><%= error.full_message %></li> #errors.where(:base).first.full_message
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="help is-danger">
+    <p>*All fields are required</p>
+  </div>
+  
+  <div class="field">
+    <%= form.label :meal_type, style: "display: block", class:"label"%>
+    <%= form.text_field :meal_type, :required => true, class:"input"%>
+  </div>
+
+  <div class="field">
+    <%= form.label :calories, style: "display: block", class:"label"%>
+    <%= form.number_field :calories, :required => true, class:"input"%>
+  </div>
+
+  <div class="field">
+    <%= form.label :proteins, style: "display: block", class:"label"%>
+    <%= form.number_field :proteins, :required => true, class:"input"%>
+  </div>
+
+  <div class="field">
+    <%= form.label :carbohydrates, style: "display: block", class:"label"%>
+    <%= form.number_field :carbohydrates, :required => true, class:"input"%>
+  </div>
+
+  <div class="field">
+    <%= form.label :fats, style: "display: block", class:"label"%>
+    <%= form.number_field :fats, :required => true, class:"input"%>
+  </div>
+  
+  <div class="field">
+    <%= form.label :category, style: "display: block", class:"label"%>
+    <div class="select">
+      <%= form.select :category_id, Category.all.collect {|u| [u.title, u.id]}%>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "button is-success"%>
+  </div>
+<% end %>
